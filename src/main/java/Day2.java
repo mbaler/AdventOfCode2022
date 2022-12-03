@@ -1,12 +1,11 @@
+import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
-import com.google.common.base.Splitter;
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
 
 // input: RPS encrypted strategy guide
 // -- 1st column: opponent's play:  A for Rock, B for Paper, and C for Scissors
@@ -29,7 +28,6 @@ import com.google.common.collect.ImmutableList;
 public class Day2 {
 
   private static final Splitter SPLITTER = Splitter.on(" ");
-
 
   public static void main(String[] args) throws IOException {
     Path path = Paths.get("src/main/resources/day2input.txt");
@@ -55,7 +53,9 @@ public class Day2 {
     System.out.println("p2 Total score: " + totalScore);
   }
 
-  private static List<Integer> p1calculateScoresPerRound(List<String> roundInputs) {
+  private static List<Integer> p1calculateScoresPerRound(
+    List<String> roundInputs
+  ) {
     ImmutableList.Builder<Integer> roundScores = ImmutableList.builder();
     for (String roundInput : roundInputs) {
       if (Strings.isNullOrEmpty(roundInput)) {
@@ -70,7 +70,9 @@ public class Day2 {
     return roundScores.build();
   }
 
-  private static List<Integer> p2calculateScoresPerRound(List<String> roundInputs) {
+  private static List<Integer> p2calculateScoresPerRound(
+    List<String> roundInputs
+  ) {
     ImmutableList.Builder<Integer> roundScores = ImmutableList.builder();
     for (String roundInput : roundInputs) {
       if (Strings.isNullOrEmpty(roundInput)) {
@@ -98,6 +100,7 @@ public class Day2 {
   private static Play extractOpponentPlay(List<String> roundInputSplit) {
     return toOpponent(roundInputSplit.get(0));
   }
+
   private static Play extractMyPlay(List<String> roundInputSplit) {
     return toMine(roundInputSplit.get(1));
   }
@@ -177,7 +180,10 @@ public class Day2 {
     }
   }
 
-  private static Play chooseWhatToPlayForDesiredOutcome(Play opponent, Outcome desiredOutcome) {
+  private static Play chooseWhatToPlayForDesiredOutcome(
+    Play opponent,
+    Outcome desiredOutcome
+  ) {
     switch (opponent) {
       case ROCK:
         if (desiredOutcome == Outcome.WIN) {
