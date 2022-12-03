@@ -1,10 +1,8 @@
+package days;
+
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 // input: RPS encrypted strategy guide
@@ -25,37 +23,27 @@ import java.util.List;
 // 2nd column: how the round needs to end:  X you lose, Y you draw, and Z you win
 // you need to figure out what shape to choose so the round ends as indicated
 
-public class Day2 {
+public class Day2 implements ADay {
 
   private static final Splitter SPLITTER = Splitter.on(" ");
 
-  public static void main(String[] args) throws IOException {
-    Path path = Paths.get("src/main/resources/day2input.txt");
-    List<String> input = Files.readAllLines(path);
-
-    part1(input);
-    part2(input);
-  }
-
-  private static void part1(List<String> input) {
+  public void part1(List<String> input) {
     List<Integer> roundScores = p1calculateScoresPerRound(input);
-    System.out.println("p1 Round scores: " + roundScores);
+    System.out.println("Round scores: " + roundScores);
 
     int totalScore = roundScores.stream().mapToInt(Integer::intValue).sum();
-    System.out.println("p1 Total score: " + totalScore);
+    System.out.println("Total score: " + totalScore);
   }
 
-  private static void part2(List<String> input) {
+  public void part2(List<String> input) {
     List<Integer> roundScores = p2calculateScoresPerRound(input);
-    System.out.println("p2 Round scores: " + roundScores);
+    System.out.println("Round scores: " + roundScores);
 
     int totalScore = roundScores.stream().mapToInt(Integer::intValue).sum();
-    System.out.println("p2 Total score: " + totalScore);
+    System.out.println("Total score: " + totalScore);
   }
 
-  private static List<Integer> p1calculateScoresPerRound(
-    List<String> roundInputs
-  ) {
+  private List<Integer> p1calculateScoresPerRound(List<String> roundInputs) {
     ImmutableList.Builder<Integer> roundScores = ImmutableList.builder();
     for (String roundInput : roundInputs) {
       if (Strings.isNullOrEmpty(roundInput)) {
@@ -70,9 +58,7 @@ public class Day2 {
     return roundScores.build();
   }
 
-  private static List<Integer> p2calculateScoresPerRound(
-    List<String> roundInputs
-  ) {
+  private List<Integer> p2calculateScoresPerRound(List<String> roundInputs) {
     ImmutableList.Builder<Integer> roundScores = ImmutableList.builder();
     for (String roundInput : roundInputs) {
       if (Strings.isNullOrEmpty(roundInput)) {
@@ -88,7 +74,7 @@ public class Day2 {
     return roundScores.build();
   }
 
-  private static int calculateRoundScore(Play opponent, Play mine) {
+  private int calculateRoundScore(Play opponent, Play mine) {
     Outcome outcome = playRound(opponent, mine);
 
     int scoreForMyPlay = mine.getScore();
@@ -97,19 +83,19 @@ public class Day2 {
     return scoreForMyPlay + scoreForOutcome;
   }
 
-  private static Play extractOpponentPlay(List<String> roundInputSplit) {
+  private Play extractOpponentPlay(List<String> roundInputSplit) {
     return toOpponent(roundInputSplit.get(0));
   }
 
-  private static Play extractMyPlay(List<String> roundInputSplit) {
+  private Play extractMyPlay(List<String> roundInputSplit) {
     return toMine(roundInputSplit.get(1));
   }
 
-  private static Outcome extractDesiredOutcome(List<String> roundInputSplit) {
+  private Outcome extractDesiredOutcome(List<String> roundInputSplit) {
     return toDesiredOutcome(roundInputSplit.get(1));
   }
 
-  private static Play toOpponent(String opponent) {
+  private Play toOpponent(String opponent) {
     if (opponent.equals("A")) {
       return Play.ROCK;
     }
@@ -122,7 +108,7 @@ public class Day2 {
     throw new IllegalArgumentException("unknown input for opponent!");
   }
 
-  private static Play toMine(String mine) {
+  private Play toMine(String mine) {
     if (mine.equals("X")) {
       return Play.ROCK;
     }
@@ -135,7 +121,7 @@ public class Day2 {
     throw new IllegalArgumentException("unknown input for mine!");
   }
 
-  private static Outcome toDesiredOutcome(String desiredOutcome) {
+  private Outcome toDesiredOutcome(String desiredOutcome) {
     if (desiredOutcome.equals("X")) {
       return Outcome.LOSE;
     }
@@ -180,7 +166,7 @@ public class Day2 {
     }
   }
 
-  private static Play chooseWhatToPlayForDesiredOutcome(
+  private Play chooseWhatToPlayForDesiredOutcome(
     Play opponent,
     Outcome desiredOutcome
   ) {
@@ -219,7 +205,7 @@ public class Day2 {
     throw new IllegalArgumentException("unknown play!");
   }
 
-  private static Outcome playRound(Play opponent, Play mine) {
+  private Outcome playRound(Play opponent, Play mine) {
     switch (mine) {
       case ROCK:
         if (opponent == Play.SCISSORS) {

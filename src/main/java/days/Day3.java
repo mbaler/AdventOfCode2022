@@ -1,13 +1,11 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+package days;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Day3 {
+public class Day3 implements ADay {
 
   // Each rucksack has 2 large compartments
   // All items of a given type are meant to go into exactly 1 of the 2 compartments
@@ -40,15 +38,7 @@ public class Day3 {
 
   // TODO: Find the item type that corresponds to the badges of each three-Elf group. What is the sum of the priorities of those item types?
 
-  public static void main(String[] args) throws IOException {
-    Path path = Paths.get("src/main/resources/day3input.txt");
-    List<String> input = Files.readAllLines(path);
-
-    part1(input);
-    part2(input);
-  }
-
-  private static void part1(List<String> input) {
+  public void part1(List<String> input) {
     List<Integer> priorities = new ArrayList<>();
 
     for (String rucksack : input) {
@@ -61,7 +51,7 @@ public class Day3 {
     System.out.println("Sum: " + sum);
   }
 
-  private static void part2(List<String> input) {
+  public void part2(List<String> input) {
     List<Integer> groupPriorities = new ArrayList<>();
 
     List<List<String>> groupList = splitIntoGroups(input);
@@ -76,7 +66,7 @@ public class Day3 {
     System.out.println("Sum: " + sum);
   }
 
-  private static char findErrorItem(String rucksack) {
+  private char findErrorItem(String rucksack) {
     int len = rucksack.length();
     int compartmentSize = len / 2;
 
@@ -101,7 +91,7 @@ public class Day3 {
     );
   }
 
-  private static List<List<String>> splitIntoGroups(List<String> input) {
+  private List<List<String>> splitIntoGroups(List<String> input) {
     int sizeOfGroups = 3;
     List<List<String>> groupList = new ArrayList<>();
 
@@ -121,7 +111,7 @@ public class Day3 {
     return groupList;
   }
 
-  private static char findGroupBadgeItem(List<String> rucksacks) {
+  private char findGroupBadgeItem(List<String> rucksacks) {
     if (rucksacks.size() != 3) {
       throw new IllegalArgumentException("Groups are always in 3s!");
     }
@@ -157,7 +147,7 @@ public class Day3 {
   private static final char UPPER_CASE_BASE = 'A';
   private static final int UPPER_CASE_PRIORITY_START = 27;
 
-  private static int toPriority(char item) {
+  private int toPriority(char item) {
     if (Character.isLowerCase(item)) {
       int offsetFromStartForLowerCase = (int) item - (int) LOWER_CASE_BASE;
       return LOWER_CASE_PRIORITY_START + offsetFromStartForLowerCase;

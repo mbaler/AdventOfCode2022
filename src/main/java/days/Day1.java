@@ -1,7 +1,10 @@
+package days;
+
 import com.google.common.base.Strings;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
@@ -34,29 +37,15 @@ import java.util.stream.Collectors;
 
 // Notes: welp, thought I might need to know about which dwarf was which, hence the map
 
-public class Day1 {
+public class Day1 implements ADay {
 
-  public static void main(String[] args) throws FileNotFoundException {
-    Scanner scanner = new Scanner(new File("src/main/resources/day1input.txt"));
-    Map<Integer, Integer> caloriesByElf = getCaloriesByElf(scanner);
-    scanner.close();
-    Comparator<Map.Entry<Integer, Integer>> byCaloriesAscending = Map.Entry.comparingByValue();
+  public void part1(List<String> input) {
+    List<Entry<Integer, Integer>> entriesByMostCalories = getCaloriesByElfEntriesOrderedByMostCalories(
+      input
+    );
 
-    List<Entry<Integer, Integer>> entriesByMostCalories = caloriesByElf
-      .entrySet()
-      .stream()
-      .sorted(byCaloriesAscending.reversed())
-      .collect(Collectors.toList());
     int fattiestElf = entriesByMostCalories.get(0).getKey();
-
     int fattiestCalories = entriesByMostCalories.get(0).getValue();
-    int topThreeFattiestCaloriesSum = entriesByMostCalories
-      .stream()
-      .limit(3)
-      .mapToInt(Entry::getValue)
-      .sum();
-
-    System.out.println("map: " + caloriesByElf);
 
     System.out.println("entriesByMostCalories: " + entriesByMostCalories);
     System.out.println(
@@ -66,6 +55,18 @@ public class Day1 {
       fattiestCalories +
       "~~~ calories!"
     );
+  }
+
+  public void part2(List<String> input) {
+    List<Entry<Integer, Integer>> entriesByMostCalories = getCaloriesByElfEntriesOrderedByMostCalories(
+      input
+    );
+
+    int topThreeFattiestCaloriesSum = entriesByMostCalories
+      .stream()
+      .limit(3)
+      .mapToInt(Entry::getValue)
+      .sum();
 
     System.out.println(
       "Top 3 fattiest are index #s: " +
@@ -80,14 +81,25 @@ public class Day1 {
     );
   }
 
-  private static Map<Integer, Integer> getCaloriesByElf(Scanner scanner) {
+  private List<Entry<Integer, Integer>> getCaloriesByElfEntriesOrderedByMostCalories(
+    List<String> input
+  ) {
+    Map<Integer, Integer> caloriesByElf = getCaloriesByElf(input);
+    Comparator<Map.Entry<Integer, Integer>> byCaloriesAscending = Map.Entry.comparingByValue();
+
+    return caloriesByElf
+      .entrySet()
+      .stream()
+      .sorted(byCaloriesAscending.reversed())
+      .collect(Collectors.toList());
+  }
+
+  private static Map<Integer, Integer> getCaloriesByElf(List<String> input) {
     Map<Integer, Integer> caloriesByElf = new HashMap<>();
 
     int elfNum = 0;
 
-    while (scanner.hasNext()) {
-      String calories = scanner.nextLine();
-
+    for (String calories : input) {
       if (Strings.isNullOrEmpty(calories)) {
         elfNum++;
         continue;
