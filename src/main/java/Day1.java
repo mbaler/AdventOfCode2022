@@ -1,32 +1,27 @@
 import com.google.common.base.Strings;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 // input: # calories each elf is carrying
 // e.g.
-/**
- * 1000
- * 2000
- * 3000
- *
- * 4000
- *
- * 5000
- * 6000
- *
- * 7000
- * 8000
- * 9000
- *
- * 10000
- */
+// 1000
+// 2000
+// 3000
+//
+// 4000
+//
+// 5000
+// 6000
+//
+// 7000
+// 8000
+// 9000
+//
+// 10000
+
 // equals:
 //  The first Elf is carrying food with 1000, 2000, and 3000 Calories, a total of 6000 Calories.
 //  The second Elf is carrying one food item with 4000 Calories.
