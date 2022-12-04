@@ -118,12 +118,14 @@ public class Day4 implements ADay {
   }
 
   private boolean doesOneRangeContainOther(Range range1, Range range2) {
+    // 1 contained by 2
     if (
       range1.getStart() >= range2.getStart() &&
       range1.getEnd() <= range2.getEnd()
     ) {
       return true;
     }
+    // 2 contained by 1
     if (
       range1.getStart() <= range2.getStart() &&
       range1.getEnd() >= range2.getEnd()
@@ -134,17 +136,14 @@ public class Day4 implements ADay {
   }
 
   private boolean doesOneRangeOverlapOther(Range range1, Range range2) {
+    // 1 begins within 2
     if (
       range1.getStart() >= range2.getStart() &&
       range1.getStart() <= range2.getEnd()
     ) {
       return true;
     }
-    if (
-      range1.getEnd() >= range2.getStart() && range1.getEnd() <= range2.getEnd()
-    ) {
-      return true;
-    }
+    // 2 begins within 1
     if (
       range2.getStart() >= range1.getStart() &&
       range2.getStart() <= range1.getEnd()
