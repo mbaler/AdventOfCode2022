@@ -11,7 +11,8 @@ import java.util.List;
 
 public class Runner {
 
-  private static final int DAY = 4;
+  private static final int DAY = 5;
+  private static final boolean TEST = false;
 
   public static void main(String[] args)
     throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -42,7 +43,9 @@ public class Runner {
 
   private static List<String> parseInputToLines() throws IOException {
     Path path = Paths.get(
-      "src/main/resources/dayinputs/day" + DAY + "input.txt"
+      TEST
+        ? "src/main/resources/dayinputs/testinput.txt"
+        : "src/main/resources/dayinputs/day" + DAY + "input.txt"
     );
     return Files.readAllLines(path);
   }
