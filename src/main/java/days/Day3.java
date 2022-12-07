@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Day3 implements ADay {
+public class Day3 implements Day {
 
   // Each rucksack has 2 large compartments
   // All items of a given type are meant to go into exactly 1 of the 2 compartments

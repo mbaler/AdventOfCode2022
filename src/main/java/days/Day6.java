@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Day6 implements ADay {
+public class Day6 implements Day {
 
   // To be able to communicate with the Elves, the device needs to lock on to their signal.
   // The signal is a series of seemingly-random characters that the device receives one at a time.

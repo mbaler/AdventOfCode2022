@@ -23,7 +23,7 @@ import java.util.List;
 // 2nd column: how the round needs to end:  X you lose, Y you draw, and Z you win
 // you need to figure out what shape to choose so the round ends as indicated
 
-public class Day2 implements ADay {
+public class Day2 implements Day {
 
   private static final Splitter SPLITTER = Splitter.on(" ");
 

@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 
 // Notes: welp, thought I might need to know about which dwarf was which, hence the map
 
-public class Day1 implements ADay {
+public class Day1 implements Day {
 
   public void part1(List<String> input) {
     List<Entry<Integer, Integer>> entriesByMostCalories = getCaloriesByElfEntriesOrderedByMostCalories(

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Day5 implements ADay {
+public class Day5 implements Day {
 
   // Supplies are stored in stacks of marked crates, but need to be rearranged
   // crane rearranges according to planned steps

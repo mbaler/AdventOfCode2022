@@ -1,7 +1,7 @@
 package utils;
 
 import com.google.common.reflect.ClassPath;
-import days.ADay;
+import days.Day;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Runner {
 
-  private static final int DAY = 6;
-  private static final boolean TEST = false;
+  private static final int DAY = 7;
+  private static final boolean TEST = true;
 
   public static void main(String[] args)
     throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -31,7 +31,7 @@ public class Runner {
       .stream()
       .filter(clazz -> clazz.getSimpleName().equals("Day" + DAY))
       .map(ClassPath.ClassInfo::load)
-      .filter(ADay.class::isAssignableFrom)
+      .filter(Day.class::isAssignableFrom)
       .findFirst()
       .orElseThrow(() ->
         new IllegalArgumentException("No Day" + DAY + " class yet!")

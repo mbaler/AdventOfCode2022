@@ -2,7 +2,7 @@ package days;
 
 import java.util.List;
 
-public interface ADay {
+public interface Day {
   void part1(List<String> input);
 
   void part2(List<String> input);

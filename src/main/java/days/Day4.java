@@ -3,7 +3,7 @@ package days;
 import com.google.common.base.Splitter;
 import java.util.List;
 
-public class Day4 implements ADay {
+public class Day4 implements Day {
 
   // each section has unique int ID #
   // elves paired up, each pair given a range of section IDs, e.g. 3-5 (3, 4, 5) or 12-12 (12)
