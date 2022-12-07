@@ -297,6 +297,26 @@ public class Day7 implements Day {
   ////////// printing out an ASCII directory tree //////////
   //////////////////////////////////////////////////////////
 
+  // e.g.
+  /*
+  ~~ /
+   ├─ a/
+   │  ├─ e/
+   │  │  └─ i (size=584)
+   │  ├─ f (size=29116)
+   │  ├─ g (size=2557)
+   │  ├─ h.lst (size=62596)
+   │  └─ z/
+   │     └─ zboi.zig (size=420)
+   ├─ b.txt (size=14848514)
+   ├─ c.dat (size=8504156)
+   └─ d/
+      ├─ d.ext (size=5626152)
+      ├─ d.log (size=8033020)
+      ├─ j (size=4060174)
+      └─ k (size=7214296)
+  */
+
   private void printFolder(int indent, Folder root, boolean isLastInFolder) {
     printFolderName(indent, root, isLastInFolder);
     printFolderContents(indent + 1, root, isLastInFolder);
