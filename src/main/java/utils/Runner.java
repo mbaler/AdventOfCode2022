@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Runner {
 
-  private static final int DAY = 8;
-  private static final boolean TEST = false;
+  private static final int DAY = 9;
+  private static final boolean TEST = true;
 
   public static void main(String[] args)
     throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
