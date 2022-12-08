@@ -20,6 +20,11 @@ public class Day8 implements Day {
   // - h is # of lines with something; w = len of lines
   // so just inner i x j to look at, where i = h - 2, j = w - 2
 
+  // [y][x]
+  // y = how many down from top, where first row is 0
+  // x = how many over from left, where first column is 0
+  // similar to bot right quadrant in plane, where top-left is 0,0
+
   // answer = edge trees + visible inner trees
   // TODO: how many trees are visible from outside the grid?
 
@@ -68,11 +73,6 @@ public class Day8 implements Day {
       System.out.println();
     }
   }
-
-  // [y][x]
-  // y = how many down from top, where first row is 0
-  // x = how many over from left, where first column is 0
-  // similar to bot right quadrant in plane, where top-left is 0,0
 
   private int calculateNumVisible(int[][] grid) {
     int numVisible = 0;
@@ -172,8 +172,7 @@ public class Day8 implements Day {
   private int[][] calculateScenicScores(int[][] grid) {
     int[][] scenicScores = new int[grid.length][grid[0].length];
     for (int y = 0; y < grid.length; y++) {
-      int[] row = grid[y];
-      for (int x = 0; x < row.length; x++) {
+      for (int x = 0; x < grid[y].length; x++) {
         scenicScores[y][x] = howScenic(x, y, grid);
       }
     }
@@ -188,11 +187,6 @@ public class Day8 implements Day {
       bottomScenery(x, y, grid)
     );
   }
-
-  // scenery score in direction is how many trees it can see until it either:
-  // - hits edge (meaning edge trees have score of 0)
-  // - hits tree >= current's height -- where you include that tree
-  // - i.e. 523143 -- middle three has scenic score of 2 to the right: trees 1 and 4
 
   private int leftScenery(int x, int y, int[][] grid) {
     if (x == 0) {
