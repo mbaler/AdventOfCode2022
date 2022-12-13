@@ -130,16 +130,6 @@ public class Day13 implements Day {
   }
 
   private int packetInRightOrder(List<Object> left, List<Object> right) {
-    if (left.isEmpty() && !right.isEmpty()) {
-      return 1;
-    }
-    if (!left.isEmpty() && right.isEmpty()) {
-      return -1;
-    }
-    if (left.isEmpty() && right.isEmpty()) {
-      return 0;
-    }
-
     for (int i = 0; i < left.size(); i++) {
       if (i == right.size()) {
         // right ran out
@@ -163,28 +153,20 @@ public class Day13 implements Day {
 
       if (l instanceof List<?> && r instanceof List<?>) {
         int result = packetInRightOrder((List<Object>) l, (List<Object>) r);
-        if (result == 0) {
-          continue;
-        } else {
+        if (result != 0) {
           return result;
         }
       }
 
       if (l instanceof List<?> && r instanceof Integer) {
-        List<Object> rList = Collections.singletonList((int) r);
-        int result = packetInRightOrder((List<Object>) l, rList);
-        if (result == 0) {
-          continue;
-        } else {
+        int result = packetInRightOrder((List<Object>) l, List.of(r));
+        if (result != 0) {
           return result;
         }
       }
       if (l instanceof Integer && r instanceof List<?>) {
-        List<Object> lList = Collections.singletonList((int) l);
-        int result = packetInRightOrder(lList, (List<Object>) r);
-        if (result == 0) {
-          continue;
-        } else {
+        int result = packetInRightOrder(List.of(l), (List<Object>) r);
+        if (result != 0) {
           return result;
         }
       }
