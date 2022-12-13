@@ -5,24 +5,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 
-// input: RPS encrypted strategy guide
-// -- 1st column: opponent's play:  A for Rock, B for Paper, and C for Scissors
-// -- 2nd column: your response:    X for Rock, Y for Paper, and Z for Scissors
-//
-// Total score = sum of scores for each round
-//  - score for a single round =
-//      score for your shape (1 for Rock, 2 for Paper, and 3 for Scissors)
-//        +
-//      score for round outcome (0 if lost, 3 if draw, and 6 if won)
-
-// TODO: calculate your total score if you follow the strategy guide
-
-// strategy: calculate score for each row (round), add scores up for all rows
-
-// p2
-// 2nd column: how the round needs to end:  X you lose, Y you draw, and Z you win
-// you need to figure out what shape to choose so the round ends as indicated
-
 public class Day2 implements Day {
 
   private static final Splitter SPLITTER = Splitter.on(" ");

@@ -8,29 +8,6 @@ import java.util.Objects;
 
 public class Day9 implements Day {
 
-  // Consider a rope with a knot at each end; these knots mark the head and the tail of the rope.
-  // If the head moves far enough away from the tail, the tail is pulled toward the head.
-  // model knot positions on 2d grid
-
-  // input: series of motions for the Head
-
-  // H and T must always be touching (diagonally adjacent and even overlapping both count as touching)
-  // If the head is ever two steps directly up, down, left, or right from the tail, the tail must also move one step in that direction so it remains close enough
-  // Otherwise, if the head and tail aren't touching and aren't in the same row or column, the tail always moves one step diagonally to keep up
-
-  // You just need to work out where the tail goes as the head follows a series of motions.
-  // Assume the head and the tail both start at the same position, overlapping
-
-  // TODO: How many positions does the tail of the rope visit at least once?
-  //  (where the starting pos is included)
-
-  // p2
-  // Rather than two knots, you now must simulate a rope consisting of ten knots.
-  // One knot is still the head of the rope and moves according to the series of motions.
-  // Each knot further down the rope follows the knot in front of it using the same rules as before.
-  // knots now thought of as H, 1, 2, ..., 9
-  // TODO: how many positions does the new tail, 9, visit?
-
   public void part1(List<String> input) {
     int numTailTouched = calculateNumLongTailTouched(input, 2);
     System.out.println("Num positions Tail touched: " + numTailTouched);

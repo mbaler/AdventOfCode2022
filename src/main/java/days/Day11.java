@@ -11,36 +11,6 @@ import java.util.stream.Collectors;
 
 public class Day11 implements Day {
 
-  // To get your stuff back, you need to be able to predict where the monkeys will throw your items.
-  // After some careful observation, you realize the monkeys operate based on how worried you are about each item.
-
-  // puzzle input: monkey notes
-  // Each monkey has several attributes:
-  // - "Starting items" lists your worry level for each item the monkey is currently holding in the order they will be inspected.
-  // - "Operation" shows how your worry level changes as that monkey inspects an item. (An operation like new = old * 5 means that your worry level after the monkey inspected the item is five times whatever your worry level was before inspection.)
-  // - "Test" shows how the monkey uses your worry level to decide where to throw an item next.
-  //   - "If true" shows what happens with an item if the Test was true.
-  //   - "If false" shows what happens with an item if the Test was false.
-
-  // After each monkey inspects an item (when your worry level gets changed) but before it tests your worry level,
-  //  your worry level is divided by 3 and rounded down to the nearest integer.
-
-  // The monkeys take turns inspecting and throwing items. On a single monkey's turn, it inspects and throws all of the items it is holding one at a time and in the order listed.
-  // Monkey 0 goes first, then monkey 1, and so on until each monkey has had one turn. The process of each monkey taking a single turn is called a round.
-  // 20 rounds
-
-  // When a monkey throws an item to another monkey, the item goes on the /end/ of the recipient monkey's list.
-  // If a monkey is holding no items at the start of its turn, its turn ends.
-
-  // Count the total number of times each monkey inspects items over 20 rounds
-  // We care about the 2 monkeys whose # of item-inspections are highest
-  // monkey business = multiply together the # of items inspected by those top 2
-  // TODO: What is the level of monkey business after 20 rounds of stuff-slinging simian shenanigans?
-
-  // p2
-  // now is no / 3 relief, and rounds are 10k
-  // need to find way to keep worry levels manageable, else can't calculate these huge #s
-
   public void part1(List<String> input) {
     List<Monkey> monkeys = parseInputToMonkeys(input);
 

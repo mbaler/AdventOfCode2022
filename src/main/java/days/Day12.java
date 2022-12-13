@@ -9,23 +9,6 @@ import java.util.function.Function;
 
 public class Day12 implements Day {
 
-  // input: heightmap of surrounding area in grid; where each square's elevation is a - z, a is lowest, z is highest elevation
-
-  // current position = S - with elevation a
-  // goal location = E - with elevation z
-
-  // want to get from S -> E but in /as few steps as possible/
-  // - in a single step, can move 1 square up, down, left, or right
-
-  // destination square elevation can be /at most 1 higher/ than current square
-  // - i.e., if at m, can go up to n, but no higher (and can of course go to m or lower)
-
-  // TODO: What is the fewest steps required to move from your current position to the location that should get the best signal?
-
-  // p2
-  // now creating a trail: find the shortest path from any square at elevation a to the square marked E
-  // TODO: What is the fewest steps required to move starting from any square with elevation a to the location that should get the best signal?
-
   public void part1(List<String> input) {
     Character[][] grid = constructGridFromInput(input);
     Node start = constructGraphFromGrid(

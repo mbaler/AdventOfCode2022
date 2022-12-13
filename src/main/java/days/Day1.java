@@ -8,35 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-// input: # calories each elf is carrying
-// e.g.
-// 1000
-// 2000
-// 3000
-//
-// 4000
-//
-// 5000
-// 6000
-//
-// 7000
-// 8000
-// 9000
-//
-// 10000
-
-// equals:
-//  The first Elf is carrying food with 1000, 2000, and 3000 Calories, a total of 6000 Calories.
-//  The second Elf is carrying one food item with 4000 Calories.
-//  The third Elf is carrying food with 5000 and 6000 Calories, a total of 11000 Calories.
-//  The fourth Elf is carrying food with 7000, 8000, and 9000 Calories, a total of 24000 Calories.
-//  The fifth Elf is carrying one food item with 10000 Calories.
-
-// TODO: Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
-// In the example above, this is 24000 (carried by the fourth Elf).
-
-// Notes: welp, thought I might need to know about which dwarf was which, hence the map
-
 public class Day1 implements Day {
 
   public void part1(List<String> input) {

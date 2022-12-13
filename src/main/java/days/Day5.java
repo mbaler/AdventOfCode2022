@@ -7,35 +7,6 @@ import java.util.Stack;
 
 public class Day5 implements Day {
 
-  // Supplies are stored in stacks of marked crates, but need to be rearranged
-  // crane rearranges according to planned steps
-  // After the crates are rearranged, the desired crates will be at the top of each stack
-  // input : a drawing of the starting stacks of crates and the rearrangement procedure
-
-  // e.g.
-  //     [D]
-  // [N] [C]
-  // [Z] [M] [P]
-  //  1   2   3
-  //
-  // move 1 from 2 to 1
-  // move 3 from 1 to 3
-  // move 2 from 2 to 1
-  // move 1 from 1 to 2
-
-  // note: even when moving multiple, crates are moved /one at a time/
-
-  // The Elves just need to know which crate will end up on top of each stack
-  // in this example, the top crates are C in stack 1, M in stack 2, and Z in stack 3, so you should combine these together and give the Elves the message CMZ.
-  // TODO: After the rearrangement procedure completes, what crate ends up on top of each stack?
-
-  // strategy: create Stack for each column, then pop and for each move, peek for final results
-  // parse each column initially into list, then in reverse order add to stack
-
-  // p2
-  // can move multiple crates at once
-  // now "quantity" of crates are moved all at once and remain in same order at destination
-
   public void part1(List<String> input) {
     int numStacks = getNumOfStacks(input);
     List<Stack<String>> stacks = parseIntoStartingStacks(numStacks, input);

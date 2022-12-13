@@ -1,35 +1,17 @@
 package days;
 
 import com.google.common.base.Splitter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day7 implements Day {
-
-  // input: terminal output of filesystem
-
-  // root dir: /
-  // 123 abc means that the current directory contains a file named abc with size 123.
-  // dir xyz means that the current directory contains a directory named xyz.
-
-  // determine the total size of each directory
-  //  - the total size of a directory is the sum of the sizes of the files it contains, directly or indirectly
-  // TODO: Find all of the directories with a total size of at most 100000.
-  //  What is the sum of the total sizes of those directories?
-  // (can count files more than once when dirs nested)
-
-  // p2
-  // total fs diskspace: 70000000
-  // need at least 30000000 unused space to run update
-  // total diskspace - root space (which is all) = currently unused
-  // that unused needs to get to 30000000
-  // amount that needs to be freed = 30000000 - unused
-  // that amount needing to be freed can be achieved by deleting 1 directory
-  // directory needs space >= that amount so it frees enough
-  // -- and choose the one that is smallest but meets that criteria
-  // TODO: Find the smallest directory that, if deleted, would free up enough space on the filesystem to run the update.
-  //  What is the total size of that directory?
 
   private static final int SIZE_LIMIT = 100000;
 

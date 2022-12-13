@@ -8,37 +8,6 @@ import java.util.Set;
 
 public class Day10 implements Day {
 
-  // screen and simple CPU  are both driven by a precise clock circuit which ticks at a constant rate; each tick is called a cycle
-  // The CPU has a single register, X, which starts with the value 1. It supports only two instructions:
-  //  - addx V takes two cycles to complete. After two cycles, the X register is increased by the value V. (V can be negative.)
-  //  - noop takes one cycle to complete. It has no other effect.
-  // puzzle input is these instructions
-
-  // consider the signal strength (the cycle number multiplied by the value of the X register) during the 20th cycle and every 40 cycles after that
-  // (that is, during the 20th, 60th, 100th, 140th, 180th, and 220th cycles)
-  // TODO: Find the signal strength during the 20th, 60th, 100th, 140th, 180th, and 220th cycles.
-  //  What is the sum of these six signal strengths?
-
-  // p2
-  // X register controls the horizontal position of a sprite
-  // - the sprite is 3 pixels wide, and the X register sets the horizontal position of the MIDDLE of that sprite's 3 pixels
-  // pixels on the CRT: 40 wide and 6 high
-  // CRT screen draws the top row of pixels left-to-right, then the row below that, and so on.
-  // The left-most pixel in each row is in position 0, and the right-most pixel in each row is in position 39
-  // the CRT draws a single pixel during each cycle
-  // here are the cycles during which the first and last pixel in each row are drawn:
-  // Cycle   1 -> ######################################## <- Cycle  40
-  // Cycle  41 -> ######################################## <- Cycle  80
-  // Cycle  81 -> ######################################## <- Cycle 120
-  // Cycle 121 -> ######################################## <- Cycle 160
-  // Cycle 161 -> ######################################## <- Cycle 200
-  // Cycle 201 -> ######################################## <- Cycle 240
-
-  // If the sprite is positioned such that one of its three pixels is the pixel currently being drawn:
-  //  - the screen produces a lit pixel (#)
-  //  - otherwise, the screen leaves the pixel dark (.)
-  // TODO: Render the image given by your program. What eight capital letters appear on your CRT?
-
   public void part1(List<String> input) {
     Map<Integer, Integer> valuesAtCycles = computeValuesAtCycles(input, 220);
     System.out.println(valuesAtCycles);

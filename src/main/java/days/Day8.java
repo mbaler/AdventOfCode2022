@@ -5,37 +5,6 @@ import java.util.List;
 
 public class Day8 implements Day {
 
-  // determine whether there is enough tree cover here to keep a tree house hidden.
-  // To do this, you need to count the number of trees that are visible from outside the grid when looking directly along a row or column
-
-  // input: a map with the height of each tree
-  // Each tree is represented as a single digit whose value is its height, where 0 is the shortest and 9 is the tallest.
-
-  // A tree is visible if all of the other trees between it and a single edge of the grid are SHORTER than it. (1 tree of >= height means not visible)
-  // Only consider trees in the same row or column; that is, only look up, down, left, or right from any given tree -- only horizontal and vertical
-  //
-  // All of the trees around the edge of the grid are visible
-  // - since they are already on the edge, there are no trees to block the view
-  // - if grid has h x w, # edge trees = h-1 + h-1 + w-1 + w-1
-  // - h is # of lines with something; w = len of lines
-  // so just inner i x j to look at, where i = h - 2, j = w - 2
-
-  // [y][x]
-  // y = how many down from top, where first row is 0
-  // x = how many over from left, where first column is 0
-  // similar to bot right quadrant in plane, where top-left is 0,0
-
-  // answer = edge trees + visible inner trees
-  // TODO: how many trees are visible from outside the grid?
-
-  // p2
-  // To measure the viewing distance from a given tree, look up, down, left, and right from that tree;
-  // stop if you reach an edge or at the first tree that is the same height or taller than the tree under consideration.
-  // (If a tree is right on the edge, at least one of its viewing distances will be zero.)
-
-  // A tree's scenic score is found by multiplying together its viewing distance in each of the four directions.
-  // TODO: Consider each tree on your map. What is the highest scenic score possible for any tree?
-
   public void part1(List<String> input) {
     int[][] grid = constructGrid(input);
     printGrid(grid);

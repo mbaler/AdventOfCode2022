@@ -7,37 +7,6 @@ import java.util.Map;
 
 public class Day3 implements Day {
 
-  // Each rucksack has 2 large compartments
-  // All items of a given type are meant to go into exactly 1 of the 2 compartments
-  // The Elf that did the packing failed to follow this rule for exactly 1 item type per rucksack
-
-  // puzzle input: a list of all of the items currently in each rucksack
-
-  // Every item type is identified by a single lowercase or uppercase letter (that is, a and A refer to different types of items).
-
-  // The list of items for each rucksack is given as characters all on a single line.
-  // A given rucksack always has the same number of items in each of its two compartments,
-  // so the first half of the characters represent items in the 1st compartment,
-  // while the second half of the characters represent items in the 2nd compartment.
-
-  // elf's failed packing for each sack means -> one letter, upper or lower, is in both the former and latter half of each sack (can be in each half multiple times)
-
-  // To help prioritize item rearrangement, every item type can be converted to a priority:
-  //    - Lowercase item types a through z have priorities 1 through 26.
-  //    - Uppercase item types A through Z have priorities 27 through 52.
-
-  // TODO: Find the item type that appears in both compartments of each rucksack. What is the /sum of the priorities/ of those item types?
-
-  // strategy: for each type, identify item in both former and latter half compartments, then save its priority, then sum those all up
-
-  // p2
-  // Elves are divided into groups of 3
-  // all 3 elves carry their badge item type in their sack, and that's the only item type shared by all 3
-  // so, need to find the common item type between all three sacks to know that group's badge type
-  // -- but, now, this thing doesn't need to be in both former and latter component of sack, just there at all
-
-  // TODO: Find the item type that corresponds to the badges of each three-Elf group. What is the sum of the priorities of those item types?
-
   public void part1(List<String> input) {
     List<Integer> priorities = new ArrayList<>();
 

@@ -5,22 +5,6 @@ import java.util.List;
 
 public class Day4 implements Day {
 
-  // each section has unique int ID #
-  // elves paired up, each pair given a range of section IDs, e.g. 3-5 (3, 4, 5) or 12-12 (12)
-  // input: list of pair section assignments, e.g.
-  // 2-4,6-8
-  // 2-3,4-5
-  // 5-7,7-9
-  // 2-8,3-7
-  // 6-6,4-6
-  // 2-6,4-8
-  // some assignments fully contain others -- e.g. 2-8 fully contains 3-7, and 6-6 is fully contained by 4-6
-
-  // TODO: in how many assignment pairs (lines) does one range fully contain the other?
-
-  // p2
-  // instead of caring only about full containments, we now want the # of assignment pairs that have /any overlap at all/
-
   public void part1(List<String> input) {
     int numContainments = 0;
     for (String assignmentPairLine : input) {
