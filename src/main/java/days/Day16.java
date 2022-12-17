@@ -2,6 +2,7 @@ package days;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,8 +26,7 @@ public class Day16 implements Day {
     int maxFlow = findMaxFlow(
       "AA",
       30,
-      new HashSet<>(flowRateByValve.keySet()),
-      false
+      new HashSet<>(flowRateByValve.keySet())
     );
     System.out.println("max flow: " + maxFlow);
   }
@@ -34,14 +34,32 @@ public class Day16 implements Day {
   public void part2(List<String> input) {
     parseInput(input);
 
-    totalFlowForEntry = new HashMap<>();
-    int maxFlow = findMaxFlow(
-      "AA",
-      26,
-      new HashSet<>(flowRateByValve.keySet()),
-      true
-    );
-    System.out.println("max flow: " + maxFlow);
+    Set<String> v = flowRateByValve.keySet();
+    Set<Set<String>> power = Sets.powerSet(v);
+    Set<Set<Set<String>>> combosOfMeAndEle = new HashSet<>();
+    for (Set<String> p : power) {
+      Set<String> other = Sets.difference(v, p);
+      combosOfMeAndEle.add(Set.of(p, other));
+    }
+
+    int best = 0;
+    for (Set<Set<String>> combo : combosOfMeAndEle) {
+      List<Set<String>> items = new ArrayList<>(combo);
+      Set<String> valvesForMe = items.get(0);
+      Set<String> valvesForEle = items.get(1);
+
+      totalFlowForEntry = new HashMap<>();
+      int forMe = findMaxFlow("AA", 26, valvesForMe);
+
+      totalFlowForEntry = new HashMap<>();
+      int forEle = findMaxFlow("AA", 26, valvesForEle);
+
+      if (forMe + forEle > best) {
+        best = forMe + forEle;
+      }
+    }
+
+    System.out.println("max flow: " + best);
   }
 
   private static final int DISTANCE_UPPER = 1000;
@@ -63,22 +81,21 @@ public class Day16 implements Day {
       String valveName = m.group(1);
       valves.add(valveName);
 
+      int flowRate = Integer.parseInt(m.group(2));
+      if (flowRate > 0) {
+        flowRateByValve.put(valveName, flowRate);
+      }
+
       List<String> targets = COMMA.splitToList(m.group(3));
       for (String target : targets) {
         distancesBetweenValves.put(new Traversal(valveName, target), 1);
       }
-
-      int flowRate = Integer.parseInt(m.group(2));
-
-      if (flowRate > 0) {
-        flowRateByValve.put(valveName, flowRate);
-      }
     }
 
+    // Floyd-Warshall
     for (String valve : valves) {
       distancesBetweenValves.put(new Traversal(valve, valve), 0);
     }
-
     for (int k = 0; k < valves.size(); k++) {
       for (int i = 0; i < valves.size(); i++) {
         for (int j = 0; j < valves.size(); j++) {
@@ -109,19 +126,13 @@ public class Day16 implements Day {
   private int findMaxFlow(
     String currentValve,
     int timeRemaining,
-    Set<String> availableValves,
-    boolean stillHaveEleFriendToUseLater
+    Set<String> availableValves
   ) {
+    if (availableValves.isEmpty()) {
+      return 0;
+    }
+
     if (timeRemaining <= 0) {
-      if (stillHaveEleFriendToUseLater) {
-        int eleContribution = findMaxFlow(
-          "AA",
-          26,
-          new HashSet<>(availableValves),
-          false
-        );
-        return eleContribution;
-      }
       return 0;
     }
 
@@ -139,18 +150,13 @@ public class Day16 implements Day {
       }
     }
 
-    FlowEntry key = new FlowEntry(
-      currentValve,
-      timeRemaining,
-      availableValves,
-      stillHaveEleFriendToUseLater
-    );
+    FlowEntry key = new FlowEntry(currentValve, timeRemaining, availableValves);
     if (totalFlowForEntry.containsKey(key)) {
       return totalFlowForEntry.get(key);
     }
 
     int best = 0;
-    for (String availableValve : new HashSet<>(availableValves)) {
+    for (String availableValve : availableValves) {
       Set<String> availableAsideFromThis = newSetExcluding(
         availableValves,
         availableValve
@@ -165,8 +171,7 @@ public class Day16 implements Day {
         findMaxFlow(
           availableValve,
           timeRemaining - toGetThere - 1,
-          availableAsideFromThis,
-          stillHaveEleFriendToUseLater
+          availableAsideFromThis
         );
       if (curr > best) {
         best = curr;
@@ -227,18 +232,11 @@ public class Day16 implements Day {
     private final String valve;
     private final int timeRemaining;
     private final Set<String> availableValves;
-    private final boolean stillHaveEleFriendToUseLater;
 
-    FlowEntry(
-      String valve,
-      int timeRemaining,
-      Set<String> availableValves,
-      boolean stillHaveEleFriendToUseLater
-    ) {
+    FlowEntry(String valve, int timeRemaining, Set<String> availableValves) {
       this.valve = valve;
       this.timeRemaining = timeRemaining;
       this.availableValves = availableValves;
-      this.stillHaveEleFriendToUseLater = stillHaveEleFriendToUseLater;
     }
 
     @Override
@@ -252,8 +250,6 @@ public class Day16 implements Day {
       FlowEntry flowEntry = (FlowEntry) o;
       return (
         timeRemaining == flowEntry.timeRemaining &&
-        stillHaveEleFriendToUseLater ==
-        flowEntry.stillHaveEleFriendToUseLater &&
         Objects.equals(valve, flowEntry.valve) &&
         Objects.equals(availableValves, flowEntry.availableValves)
       );
@@ -261,12 +257,7 @@ public class Day16 implements Day {
 
     @Override
     public int hashCode() {
-      return Objects.hash(
-        valve,
-        timeRemaining,
-        availableValves,
-        stillHaveEleFriendToUseLater
-      );
+      return Objects.hash(valve, timeRemaining, availableValves);
     }
   }
 }
