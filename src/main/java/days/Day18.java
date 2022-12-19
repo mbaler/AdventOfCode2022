@@ -175,9 +175,8 @@ public class Day18 implements Day {
       Coord curr = q.poll();
       if (visited.contains(curr)) {
         continue;
-      } else {
-        visited.add(curr);
       }
+      visited.add(curr);
 
       if (airCubes.contains(curr)) {
         airCubes.remove(curr);
@@ -198,7 +197,7 @@ public class Day18 implements Day {
     return airCubes;
   }
 
-  record Coord(int x, int y, int z) {}
+  private record Coord(int x, int y, int z) {}
 
-  record Cube(Coord coord) {}
+  private record Cube(Coord coord) {}
 }

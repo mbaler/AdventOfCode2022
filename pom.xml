@@ -33,18 +33,54 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>com.hubspot.maven.plugins</groupId>
-        <artifactId>prettier-maven-plugin</artifactId>
-        <version>0.8</version>
+        <!-- Build an executable JAR -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>utils.Runner</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
-            <phase>validate</phase>
+            <phase>package</phase>
             <goals>
-              <goal>${plugin.prettier.goal}</goal>
+              <goal>single</goal>
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>utils.Runner</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
       </plugin>
+<!--      <plugin>-->
+<!--        <groupId>com.hubspot.maven.plugins</groupId>-->
+<!--        <artifactId>prettier-maven-plugin</artifactId>-->
+<!--        <version>0.8</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <phase>validate</phase>-->
+<!--            <goals>-->
+<!--              <goal>${plugin.prettier.goal}</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
     </plugins>
   </build>
 
