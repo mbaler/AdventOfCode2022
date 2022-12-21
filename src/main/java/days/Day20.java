@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class Day20 implements Day {
 
+  // welp, I was sure we'd need to know the eventual ordering -- hence keeping track of 'front'
+  // turns out that was never necessary ¯\_(ツ)_/¯
+
   private int len = 0;
   private Node front = null;
 
