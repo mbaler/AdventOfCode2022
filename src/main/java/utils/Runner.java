@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Runner {
 
-  private static final int DAY = 23;
+  private static final int DAY = 24;
   private static final boolean TEST = true;
 
   public static void main(String[] args)
